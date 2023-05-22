@@ -1,0 +1,71 @@
+BONUS CHALLENGE FORM
+--------------------
+
+For each bonus challenge you have implemented, please replace the sentence "We are not entitled to this bonus."
+with a short description of:
+
+1. How it was implemented in your code
+2. Where it was used (in which class methods).
+3. How you tested that it is working correctly.
+
+--------------------
+
+1. Fully supporting all configuration fields and avoiding the use of magic numbers
+
+1. This task was implemented like so: for each configuration field, we used it as a parameter for its destenation. 
+2. 
+
+turnTimeoutMillis: 
+class: Dealer
+mathods:timerloop
+class: dealer
+mathods:updateTimerDisplay
+
+turnTimeoutWarningMillis
+class: Dealer
+mathods: updateTimerDisplay
+
+penaltyFreezeMillis
+class: Player
+mathods: panelty
+
+
+pointMillis
+class: Player
+mathods: point
+
+
+--------------------
+
+2. Terminating all threads (that you created) gracefully and in reverse order to the order they were created in.
+
+1. When terminating the progrm, the player threads are terminated in the reversed order they were created in, and finally the Delaer thread was terminated.
+2.
+class: Dealer
+mathods: teminate
+
+
+--------------------
+
+3. Handling the config.turnTimeoutMillis value as follows:
+config.turnTimeoutMillis < 0: display nothing.
+config.turnTimeoutMillis = 0: display a timer since the last action (reshuffle or set collected).
+Note: in modes without a countdown timer the dealer must ensure there is always at least one legal set on the table.
+
+We are not entitled to this bonus.
+
+--------------------
+
+4. Making sure that the threads do not wake up unless some actual job needs to be done (e.g., a value needs to be
+changed on the display, key input needs to be handled, etc.) and the only threads created by you are:
+1 thread per player + 1 additional thread for non-human players.
+
+1. By syncronizing the critical parts in the code, we made the threads wait,in to prevent collitions. In addition, we Queued the Objects the threads needed to work on.
+Thus, when there was no object to work on, the threads were idle.
+
+2. in the Dealer class, we implemented the notification for the players to go back to work, along with a blocking queue for the players that handed a set 
+check.
+In the Player's class, the player waits after handing the set to be checked(checkPlayer method). In addition, we maintained a queue for the key presses, so 
+the player works only when there are keypresses to check.
+
+3. We ren our program in different scenarios (a different amount of time, number of humen/non humen players and more) 
